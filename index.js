@@ -3,18 +3,18 @@ var express = require('express')
 var app = express()
 var bodyParser = require('body-parser')
 
-mongoose.connect('mongodb://localhost:27017/homework_db')
+// mongoose.connect('mongodb://localhost:27017/homework_db')
 
-app.use(express.static('public'))
+// app.use(express.static('public'))
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
+// app.use(bodyParser.json())
+// app.use(bodyParser.urlencoded({ extended: false }))
 
-var homework = require('./models/homework/homework.route.js')
-app.use('/api/homework', homework)
+// var homework = require('./models/homework/homework.route.js')
+// app.use('/api/homework', homework)
 
-var phonebook = require('./models/phonebook/phonebook.route.js')
-app.use('/api/phonebook', phonebook)
+// var phonebook = require('./models/phonebook/phonebook.route.js')
+// app.use('/api/phonebook', phonebook)
 
 
 var server = app.listen(3000, function () {
