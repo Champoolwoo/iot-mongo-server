@@ -2,13 +2,13 @@ angular.module('app', [])
   .controller('AppController', function ($http, $interval) {
     var vm = this
 
-    getHomeworks()
+    getIOT()
     $interval(function () {
-      getHomeworks()
+      getIOT()
     }, 5000)
 
     vm.submit = function (input) {
-      saveHomework(input)
+      saveIOT(input)
     }
 
     vm.toThaiDateTime = function (date) {
@@ -18,7 +18,7 @@ angular.module('app', [])
     function getIOT () {
       $http.get('/api/iot')
         .then(function success (response) {
-          vm.homeworks = response.data
+          vm.IOT = response.data
         }, function error (response) {
           alert(response.data.message)
         })
@@ -28,7 +28,7 @@ angular.module('app', [])
       $http.post('/api/iot', data)
         .then(function success (response) {
           console.log(response)
-          getHomeworks()
+          getIOT()
           alert('Success')
         }, function error (response) {
           alert(response.data.message)

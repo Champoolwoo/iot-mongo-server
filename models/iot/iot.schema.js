@@ -1,6 +1,6 @@
 ;(function () {
   'use strict'
-  var modelName = 'iot'
+  var modelName = 'IOT'
   var mongoose = require('mongoose')
   var Schema = mongoose.Schema
 
@@ -8,7 +8,7 @@
 
     timestamp: { type: Date, default: Date.now },
 
-    id_iot: {
+    iot_id: {
       type: String,
       required: true
     },
