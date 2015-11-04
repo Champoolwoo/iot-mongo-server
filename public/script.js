@@ -35,48 +35,49 @@ angular.module('app', [])
         })
     }
     ////////////////////////////////////
-    vm.graph = function(){
+   
       $http.get('/api/iot')
       .then(function success (response) {
+
         var data = {
-        labels : [],
-        datasets : [
-          {
-            label: "temperature",
-            fillColor: "rgba(220,220,220,0.2)",
-            strokeColor: "rgba(220,220,220,1)",
-            pointColor: "rgba(220,220,220,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(220,220,220,1)",
-            data: []
-          },
-          {
-            label: "relative_humidity",
-            fillColor: "rgba(151,187,205,0.2)",
-            strokeColor: "rgba(151,187,205,1)",
-            pointColor: "rgba(151,187,205,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(151,187,205,1)",
-            data: []
-          }]
+          labels: [],
+          datasets: [{
+              label: "temperature",
+              fillColor: "rgba(255,0,0,0.2)",
+              strokeColor: "rgba(255,0,0,1)",
+              pointColor: "rgba(255,0,0,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(220,220,220,1)",
+              data: []
+            },
+            {
+              label: "relative_humidity",
+              fillColor: "rgba(69,187,91,0.2)",
+              strokeColor: "rgba(69,187,91,1)",
+              pointColor: "rgba(69,187,91,1)",
+              pointStrokeColor: "#fff",
+              pointHighlightFill: "#fff",
+              pointHighlightStroke: "rgba(151,187,205,1)",
+              data: []
+            }]
+          };
+
+          var ctx = document.getElementById("myChart").getContext("2d")
+          var myLineChart = new Chart(ctx).Line(data);
+         
+          for(var i =0;i<response.data.length;i++){
+
+            if (response.data[i].iot_id==7){
+               myLineChart.addData([response.data[i].temperature, response.data[i].relative_humidity] ,vm.toThaiDateTime(response.data[i].timestamp));
+            }
+
         }
-
-        var ctx = document.getElementById("myChart").getContext("2d");
-        new Chart(ctx).Line(data);
-
-        for(var i =0;i<response.data.length;i++){
-          if (response.data[i].iot_id==0){
-            myLineChart.addData([response.data[i].temperature, response.data[i].relative_humidity] ,vm.toThaiDateTime(response.data[i].timestamp));
-          }
-                   
-        }
-
+        
       },function error (response) {
         alert(response.data.message)
       }) 
-    }
+    
     ////////////////////////////////////
 
   })
