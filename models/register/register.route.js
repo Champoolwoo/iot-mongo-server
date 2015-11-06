@@ -25,5 +25,19 @@
     })
   })
 
+///////////////////////////////////////////////////////////Login
+
+   router.post('/login',function(req,res){
+      console.log(req.body.username + " " +req.body.  password);  
+       member.find({ username : req.body.username , password : req.body.password }).exec(function (err, results) {
+       if (err) {
+         res.status(500).send(err);
+       } else {
+       
+        res.send(results)
+        console.log(results)
+       }
+     }); 
+
   module.exports = router
 })()
