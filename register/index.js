@@ -10,7 +10,7 @@ app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-var iot = require('./models/register/register.route.js')
+var register = require('./models/register/register.route.js')
 app.use('/api/register', register)
 
 
